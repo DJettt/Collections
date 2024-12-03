@@ -1,5 +1,7 @@
 package ru.naumen.collection.task1;
 
+import java.util.HashMap;
+
 /**
  * Дано:
  * <pre>
@@ -24,6 +26,10 @@ package ru.naumen.collection.task1;
  */
 public class Task1
 {
+//  Изначальная сложность поиска в HashMap равна const + O(1) в случае, когда
+//  коллизия отсутствует. Но при большом объеме данных сложность поиска будет стремиться
+//  к O(n) из-за огромного количества коллизий по хешу.
+    private final HashMap<Long, Goods> information  = new HashMap<>();
     public enum Goods {
         /**
          * нет товаров
@@ -38,12 +44,13 @@ public class Task1
          */
         FOOD_AND_DRINKS
     }
-
     /**
      * Получить товары по билету
      */
     public Goods getGoods(Ticket ticket) {
-        // TODO реализовать
-        return null;
+        // В задании сказано, что бармен должен осуществлять быстрый поиск по номеру билета.
+        Goods goods = information.get(ticket.getId());
+        //Если товара нет в HashMap, то возвращаем Goods.EMPTY
+        return goods != null ? goods : Goods.EMPTY;
     }
 }
