@@ -26,8 +26,10 @@ import java.util.HashMap;
  */
 public class Task1
 {
-//  Используем HashMap, так как при небольшом объеме данных сложность поиска будет O(1)
-    HashMap<Ticket, Goods> information  = new HashMap<>();
+//  Изначальная сложность поиска в HashMap равна const + O(1) в случае, когда
+//  коллизия отсутствует. Но при большом объеме данных сложность поиска будет стремиться
+//  к O(n) из-за огромного количества коллизий по хешу.
+    private final HashMap<Long, Goods> information  = new HashMap<>();
     public enum Goods {
         /**
          * нет товаров
@@ -46,6 +48,9 @@ public class Task1
      * Получить товары по билету
      */
     public Goods getGoods(Ticket ticket) {
-        return information.get(ticket);
+        // В задании сказано, что бармен должен осуществлять быстрый поиск по номеру билета.
+        Goods goods = information.get(ticket.getId());
+        //Если товара нет в HashMap, то возвращаем Goods.EMPTY
+        return goods != null ? goods : Goods.EMPTY;
     }
 }
