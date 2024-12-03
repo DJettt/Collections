@@ -1,5 +1,7 @@
 package ru.naumen.collection.task1;
 
+import java.util.HashMap;
+
 /**
  * Дано:
  * <pre>
@@ -24,6 +26,8 @@ package ru.naumen.collection.task1;
  */
 public class Task1
 {
+//  Используем HashMap, так как при небольшом объеме данных сложность поиска будет O(1)
+    HashMap<Ticket, Goods> information  = new HashMap<>();
     public enum Goods {
         /**
          * нет товаров
@@ -38,12 +42,10 @@ public class Task1
          */
         FOOD_AND_DRINKS
     }
-
     /**
      * Получить товары по билету
      */
     public Goods getGoods(Ticket ticket) {
-        // TODO реализовать
-        return null;
+        return information.get(ticket);
     }
 }
